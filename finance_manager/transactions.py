@@ -1,15 +1,21 @@
 from core.file_handler import *
 from datetime import datetime
+from core.file_handler import Pickle_db
 import re
 
 
 class Transaction:
+
+    transactions_db = Pickle_db("transactions_pickle.db")
+    transactions_list = []
 
     def __init__(self, date, amount, category, description):
         self.date = date
         self.amount = amount
         self.category = category
         self.description = description
+        self.transactions_list.append(self)
+        self.transactions_db.add_data(__class__.transactions_list)
 
     @property
     def date(self):
@@ -32,3 +38,8 @@ class Transaction:
         if not re.match(r'^[0-9]+$', value):
             raise ValueError("Invalid amount")
         self._amount = value
+
+    @classmethod
+    def show_transactions(cls):
+        # load_data methode load all data as a list
+        print(cls.transactions_db.load_data())
