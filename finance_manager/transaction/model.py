@@ -18,7 +18,8 @@ class Transaction:
 
     @property
     def date(self):
-        return self._date
+        #dont show time
+        return self._date.date()
 
     @date.setter
     def date(self, value):
@@ -42,5 +43,9 @@ class Transaction:
     def all_transactions(cls):
         # load_data methode load all data as a list
         return cls.transactions_db.load_data()
+
+# test = Transaction('2020-08-1', '5000', 'salary', 'for working')
+# test2 = Transaction('2020-08-12', '400', 'fee', 'paid the fees')
+# test1 = Transaction('2020-08-8', '100', 'food', 'buy this week ingrediate')
 
 

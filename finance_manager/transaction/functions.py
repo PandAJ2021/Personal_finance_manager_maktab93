@@ -20,8 +20,8 @@ def filter_category(catg: str) -> str:
 def filter_date(start, end):
     try:
         # converted to datetime object
-        start_date = datetime.strptime(start, "%Y-%m-%d")
-        end_date = datetime.strptime(end, "%Y-%m-%d")
+        start_date = datetime.strptime(start, "%Y-%m-%d").date()
+        end_date = datetime.strptime(end, "%Y-%m-%d").date()
     except ValueError:
         print('Invalid date format')
 
