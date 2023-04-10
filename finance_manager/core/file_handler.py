@@ -10,7 +10,7 @@ class Pickle_db:
 
     def load_data(self):
         objects = []
-        with (open(self.file_name, "rb")) as openfile:
+        with open(self.file_name, "rb") as openfile:
             while True:
                 try:
                     objects.append(pickle.load(openfile))
