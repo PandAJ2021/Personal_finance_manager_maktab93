@@ -40,6 +40,6 @@ class Transaction:
         self._amount = value
 
     @classmethod
-    def show_transactions(cls):
+    def all_transactions(cls):
         # load_data methode load all data as a list
-        print(cls.transactions_db.load_data())
+        return cls.transactions_db.load_data()
