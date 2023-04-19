@@ -1,5 +1,5 @@
 from datetime import datetime
-from core.file_handler import Pickle_db
+from file_handler import Pickle_db
 import re
 
 
@@ -8,11 +8,12 @@ class Transaction:
     transactions_db = Pickle_db("transactions_pickle.db")
     # transactions_list = []
 
-    def __init__(self, date, amount, category, description):
+    def __init__(self, action_type, date, amount, category, description=''):
         self.date = date
         self.amount = amount
         self.category = category
         self.description = description
+        self.action_type = action_type
         # self.transactions_list.append(self)
         self.transactions_db.add_data(self)
 
@@ -44,8 +45,9 @@ class Transaction:
         # load_data methode load all data as a list
         return cls.transactions_db.load_data()
 
-# test = Transaction('2020-08-1', '5000', 'salary', 'for working')
-# test2 = Transaction('2020-08-12', '400', 'fee', 'paid the fees')
-# test1 = Transaction('2020-08-8', '100', 'food', 'buy this week ingrediate')
 
 
+# test = Transaction('income', '2020-08-1', '5000', 'salary', 'for working')
+# test2 = Transaction('income', '2020-08-12', '400', 'fee', 'paid the fees')
+# test1 = Transaction('income', '2020-08-8', '100', 'food',
+#                     'buy this week ingrediate')
