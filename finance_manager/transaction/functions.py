@@ -5,6 +5,20 @@ import re
 transactions_list = Transaction.all_transactions()
 
 
+def report_date(start, end):
+    total_income, total_expence = 0 , 0
+    try:
+        start_date = datetime.strptime(start, "%Y-%m-%d").date()
+        end_date = datetime.strptime(end, "%Y-%m-%d").date()
+    except ValueError:
+        print('Invalid date format')
+
+    for obj in filter(lambda x: start_date < x.date < end_date, transactions_list):
+        total_income += obj.amount if obj.action_type == 'income' else total_expence + obj.amount
+    print(
+        f'total_income: {total_income} , totlal_expence: {total_expence}, balance: {total_income-total_expence}')
+
+
 def display_all_transaction() -> str:
     for obj in transactions_list:
         print(

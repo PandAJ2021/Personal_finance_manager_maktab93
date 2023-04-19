@@ -1,6 +1,6 @@
 import argparse
 from transaction import model
-from transaction.functions import display_all_transaction, filter_category, filter_date, add_transaction
+from transaction.functions import display_all_transaction, filter_category, filter_date, add_transaction, report_date
 
 
 parser = argparse.ArgumentParser(prog='Finance Manager',
@@ -22,9 +22,10 @@ group_add.add_argument(
 group_view = parser.add_argument_group('view', 'View transactions.')
 group_view.add_argument('--start-date',  required=False)
 group_view.add_argument('--end-date',  required=False)
-# ==================== view gruop ===========================
+# ==================== report gruop ===========================
 group_report = parser.add_argument_group('report', 'report transactions.')
 args = parser.parse_args()
+
 
 if args.action == 'add':
     if not all([args.type, args.date, args.amount, args.category]):
@@ -42,3 +43,11 @@ if args.action == 'view':
         filter_category(args.category)
     else:
         display_all_transaction()
+
+
+if args.action == 'report':
+    if not all([args.start_date, args.end_date]):
+        parser.error(
+            'the following arguments are required: --start-date , --end-date')
+    else:
+        report_date(args.start_date, args.end_date)

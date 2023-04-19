@@ -38,7 +38,7 @@ class Transaction:
     def amount(self, value):
         if not re.match(r'^[0-9]+$', value):
             raise ValueError("Invalid amount")
-        self._amount = value
+        self._amount = int(value)
 
     @classmethod
     def all_transactions(cls):
@@ -46,8 +46,4 @@ class Transaction:
         return cls.transactions_db.load_data()
 
 
-
-# test = Transaction('income', '2020-08-1', '5000', 'salary', 'for working')
-# test2 = Transaction('income', '2020-08-12', '400', 'fee', 'paid the fees')
-# test1 = Transaction('income', '2020-08-8', '100', 'food',
-#                     'buy this week ingrediate')
+# Transaction('action_type', '2020-04-24', '150', 'category')
