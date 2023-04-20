@@ -7,7 +7,7 @@ class Transaction:
 
     transactions_db = Pickle_db("transactions_pickle.db")
 
-    def __init__(self, action_type, date, amount, category, description=''):
+    def __init__(self, action_type, date, amount, category, description='Not necessary'):
         self.date = date
         self.amount = amount
         self.category = category
@@ -15,9 +15,14 @@ class Transaction:
         self.action_type = action_type
         self.transactions_db.add_data(self)
 
+    def __str__(self):
+        return "action: {0}, date: {1}, amount: {2}, category: {3}, description: {4}".\
+            format(self.action_type, self.date, self.amount,
+                   self.category, self.description)
+
     @property
     def date(self):
-        #dont show time
+        # dont show time
         return self._date.date()
 
     @date.setter
