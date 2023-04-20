@@ -6,7 +6,6 @@ import re
 class Transaction:
 
     transactions_db = Pickle_db("transactions_pickle.db")
-    # transactions_list = []
 
     def __init__(self, action_type, date, amount, category, description=''):
         self.date = date
@@ -14,7 +13,6 @@ class Transaction:
         self.category = category
         self.description = description
         self.action_type = action_type
-        # self.transactions_list.append(self)
         self.transactions_db.add_data(self)
 
     @property
