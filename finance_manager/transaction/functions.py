@@ -1,4 +1,5 @@
 from transaction.model import Transaction
+from exceptions import *
 from datetime import datetime
 import re
 
@@ -7,8 +8,8 @@ def filter_transactions_by_date(start: str, end: str):
     try:
         start_date = datetime.strptime(start, "%Y-%m-%d").date()
         end_date = datetime.strptime(end, "%Y-%m-%d").date()
-    except ValueError:
-        print('Invalid date format')
+    except InvalidDateFormat as err:
+        print(err)
         return []
 
     return filter(lambda x: start_date < x.date < end_date, Transaction.all_transactions())

@@ -1,5 +1,6 @@
 from datetime import datetime
 from file_handler import Pickle_db
+from exceptions import *
 import re
 
 
@@ -30,8 +31,8 @@ class Transaction:
         try:
             # I can use datetime object to compare two date
             self._date = datetime.strptime(value, "%Y-%m-%d")
-        except ValueError:
-            print("Invalid date format")
+        except InvalidDateFormat as err:
+            print(err)
 
     @property
     def amount(self):
@@ -40,13 +41,15 @@ class Transaction:
     @amount.setter
     def amount(self, value):
         if not re.match(r'^[0-9]+$', value):
-            raise ValueError("Invalid amount")
+            raise InvalidAmount
         self._amount = int(value)
 
     @classmethod
     def all_transactions(cls):
-        # load_data methode load all data as a list
-        return cls.transactions_db.load_data()
+        try:
+            # load_data methode load all data as a list
+            return cls.transactions_db.load_data()
+        except FileLoadingError as err:
+            print(f"Error loading data: {e}")
+            return []
 
-
-# Transaction('action_type', '2020-04-24', '150', 'category')
